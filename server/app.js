@@ -31,8 +31,8 @@ const crud_table = sequelize.define(
   "crud_table",
   {
     project_name: Sequelize.STRING,
-    version: Sequelize.INTEGER,
-    build_no: Sequelize.INTEGER,
+    version: Sequelize.DECIMAL,
+    build_no: Sequelize.DECIMAL,
     release_note: Sequelize.TEXT,
     date: Sequelize.STRING,
   },

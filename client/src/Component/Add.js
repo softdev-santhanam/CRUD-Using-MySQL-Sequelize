@@ -130,7 +130,7 @@ const AddData = () => {
 
               <div className="date mb-3">
                 <Form.Control
-                  type="text"
+                  type="hidden"
                   name="date"
                   id="date"
                   defaultValue={values.date}

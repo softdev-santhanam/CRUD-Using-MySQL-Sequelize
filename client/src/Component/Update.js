@@ -8,8 +8,8 @@ const EditEmployee = () => {
   const [data, setData] = useState({
     userId: null,
     project_name: null,
-    version: null,
-    build_no: null,
+    version: Number,
+    build_no: Number,
     release_note: null,
   });
 

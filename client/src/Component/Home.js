@@ -5,7 +5,6 @@ import { Link, useNavigate } from "react-router-dom";
 import _ from "lodash";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
-// Specify How many Data Need in Home Page Table
 const pageSize = 5;
 const Posts = (props) => {
   const navigate = useNavigate();
@@ -40,11 +39,10 @@ const Posts = (props) => {
   };
 
   // Delete Data By Id
-  const handleDelete = (id) => {
+  const onDelete = (id) => {
     axios
-      .delete(`http://localhost:7000/${id}`, posts)
+      .delete(`http://localhost:7000/${id}`)
       .then(() => {
-        alert("Data deleted successfully!");
         navigate("/");
       })
       .catch((err) => {
@@ -68,19 +66,23 @@ const Posts = (props) => {
           <caption>List of Notes</caption>
 
           <thead className="tr">
-            <tr className="p">
-              <th>ID</th>
-              <th>Project Name</th>
-              <th>Version</th>
-              <th>Build Number</th>
-              <th>Description</th>
-              <th>Created Date</th>
-              <th>Edit</th>
-              <th>Delete</th>
+            <tr className="">
+              <th className="p-3">ID</th>
+              <th className="p-3">Project Name</th>
+              <th className="p-3">Version</th>
+              <th className="p-3">Build Number</th>
+              <th className="p-3">Description</th>
+              <th className="p-3">Created Date</th>
+              <th className="p-3">Edit</th>
+              <th className="p-3">Delete</th>
             </tr>
           </thead>
 
           {paginatedPosts.map((data) => {
+            const del = () => {
+              onDelete(data.id);
+              alert("Data deleted successfully!");
+            };
             return (
               <tbody key={data.id}>
                 <tr>
@@ -99,11 +101,7 @@ const Posts = (props) => {
                   </td>
 
                   <td>
-                    <button
-                      type="button"
-                      className="bi-trash"
-                      onClick={() => handleDelete(data.id)}
-                    >
+                    <button type="button" className="bi-trash" onClick={del}>
                       <FaTrashAlt />
                     </button>
                   </td>
