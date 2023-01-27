@@ -5,7 +5,8 @@ import { Link, useNavigate } from "react-router-dom";
 import _ from "lodash";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
-const pageSize = 1;
+// Specify How many Data Need in Home Page Table
+const pageSize = 5;
 const Posts = (props) => {
   const navigate = useNavigate();
   const [posts, setPosts] = useState([]);
