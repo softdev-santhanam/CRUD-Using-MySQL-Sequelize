@@ -1,0 +1,4 @@
+npm install express nodemon body-parser sequelize mysql2
+
+crud-operation-using-sequelize-MySQL
+CRUD Operation using React, Node js, Express, MySQL, Sequelize, Pagination, Front-end, Back-end
