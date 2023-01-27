@@ -1,13 +1,12 @@
 import axios from "axios";
 import "../App.css";
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import _ from "lodash";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 
 const pageSize = 5;
-const Posts = (props) => {
-  const navigate = useNavigate();
+const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [paginatedPosts, setPaginatedPosts] = useState();
   const [currentPage, setCurrentPage] = useState(1);
@@ -26,6 +25,26 @@ const Posts = (props) => {
       });
   }, []);
 
+  // Delete Data By Id
+
+  const onDelete = async (id) => {
+    const confirm = window.confirm(
+      "Are you sure you want to delete this data?"
+    );
+    if (confirm) {
+      alert("Data deleted successfully!");
+      await axios
+        .delete(`http://localhost:7000/${id}`)
+        .then(() => {
+          console.log("Data deleted successfully.");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  };
+
+
   // Pagination
   const pageCount = posts ? Math.ceil(posts.length / pageSize) : 0;
   if (pageCount === 1) return null;
@@ -36,18 +55,6 @@ const Posts = (props) => {
     const startIndex = (pageNo - 1) * pageSize;
     const paginatedPost = _(posts).slice(startIndex).take(pageSize).value();
     setPaginatedPosts(paginatedPost);
-  };
-
-  // Delete Data By Id
-  const onDelete = (id) => {
-    axios
-      .delete(`http://localhost:7000/${id}`)
-      .then(() => {
-        navigate("/");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   };
 
   return (
@@ -63,7 +70,9 @@ const Posts = (props) => {
         "No Data"
       ) : (
         <table className="table caption-top table table-striped table-hover container center_div mt-5 border">
-          <caption>List of Notes</caption>
+          <caption>
+            <h3>List of Notes</h3>
+          </caption>
 
           <thead className="tr">
             <tr className="">
@@ -81,7 +90,7 @@ const Posts = (props) => {
           {paginatedPosts.map((data) => {
             const del = () => {
               onDelete(data.id);
-              alert("Data deleted successfully!");
+              window.location.href = "/";
             };
             return (
               <tbody key={data.id}>
