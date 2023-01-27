@@ -11,7 +11,7 @@ Access to XMLHttpRequest at 'http://localhost:7000' from origin
  var cors = require('cors')
 app.use(cors()) // Use this after the variable declaration
 
-<!-- Working -->
+<!--  Working  -->
 const cors = require('cors');
 const corsOptions ={
     origin:'http://localhost:3000', 
